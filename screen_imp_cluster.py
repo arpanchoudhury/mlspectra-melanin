@@ -4,6 +4,7 @@ import pandas as pd
 import MLSpectra
 
 
+dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
 
 # Binning of spectrum 
 spec_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'datasets/mki1/CAMB3LYP_6-31Gd_spectra')
@@ -18,7 +19,7 @@ Int_lam, lambda_min, dlambda = MLSpectra.bin_spectra_uniform(spec_path, read_spe
 
 
 # Cluster-wise averaging 
-df = pd.read_csv('subclusters_mki1_result.csv', index_col=[0])
+df = pd.read_csv(dataDir+'subclusters_mki1_result.csv', index_col=[0])
 n_cluster = len(df['cluster'].value_counts().index)
 
 whole_spec = []

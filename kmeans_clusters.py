@@ -1,13 +1,17 @@
+import os
 import pandas as pd
 from sklearn.cluster import KMeans
 import joblib
 
 
-# reading input data
-data = pd.read_csv('clustering_input_reduced.csv')
-print(data.shape)
 
-'''
+dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
+
+
+# reading input data
+data = pd.read_csv(dataDir+'clustering_input_reduced.csv')
+
+"""
 # fitting multiple k-means and storing the inertia values (accuracy index)
 inertia_list = []
 for cluster in range(1,201):    # (this value should be <= no. of data points)
@@ -18,7 +22,7 @@ for cluster in range(1,201):    # (this value should be <= no. of data points)
 
 for iner in range(len(inertia_list)):
     result.write('Inertia value using '+str(iner+1)+' clusters = '+str(inertia_list[iner])+'\n')
-'''
+"""
 
 # specify the no. of clusters
 n_clusters = 60
@@ -34,5 +38,5 @@ frame = pd.DataFrame(data)
 frame['cluster'] = pred
 
 # save the clustering result & kmeans model
-frame.to_csv('clusters_reduced_result.csv', index=False)
-joblib.dump(kmeans, 'clusters_reduced_model.jl') 
+frame.to_csv(dataDir+'clusters_reduced_result.csv', index=False)
+joblib.dump(kmeans, dataDir+'clusters_reduced_model.jl') 

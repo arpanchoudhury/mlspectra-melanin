@@ -1,13 +1,14 @@
+import os
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
 import joblib
 
 
-
+dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
 
 # Features to be clustered in sub-clustering
-sub_clus_feat = 'OH_dihedrals_reduced.csv'
+sub_clus_feat = dataDir+'OH_dihedrals_reduced.csv'
 data = pd.read_csv(sub_clus_feat)
 arr = data.to_numpy()
 for j in range(arr.shape[1]):
@@ -18,7 +19,7 @@ for j in range(arr.shape[1]):
 
 # Data from parent clustering
 n_cluster = 60
-parent_clus_result = 'clusters_reduced_result.csv'
+parent_clus_result = dataDir+'clusters_reduced_result.csv'
 df = pd.read_csv(parent_clus_result)
 
 
@@ -71,7 +72,7 @@ for clus_no in range(n_cluster):
 
 
 # Save the sub-cluster result
-final_df.to_csv('subclusters_reduced_result.csv', index=True, index_label='Mol. index')
-joblib.dump(mod_list, 'subclusters_reduced_model.jl')
+final_df.to_csv(dataDir+'subclusters_reduced_result.csv', index=True, index_label='Mol. index')
+joblib.dump(mod_list, dataDir+'subclusters_reduced_model.jl')
 
 

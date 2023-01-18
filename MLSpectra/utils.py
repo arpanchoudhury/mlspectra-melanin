@@ -14,7 +14,7 @@ def read_files(path):
 
 
 def read_data(geomFile, specFile, imp_clusters):
-    df = pd.read_csv(geomFile, header=None)
+    df = pd.read_csv(geomFile)
     n_cluster = len(df['cluster'].value_counts().index)
     geom = df.iloc[:,:-1].to_numpy()
     spec = np.loadtxt(specFile)

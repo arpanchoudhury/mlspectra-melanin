@@ -5,6 +5,8 @@ import MLSpectra
 
 
 
+dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
+
 # ================= Binning of spectrum ================= 
 spec_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'datasets/reduced/CAMB3LYP_6-31Gd_spectra') 
 # spec_path contains csv files with wavelength (nm) and oscillator strength named as 000001.csv and so on
@@ -20,7 +22,7 @@ Int_lam, lambda_min, dlambda = MLSpectra.bin_spectra_uniform(spec_path, read_spe
 
 
 # ================= Averaging within sub-clusters =================
-df = pd.read_csv('subclusters_reduced_result.csv', index_col=[0])
+df = pd.read_csv(dataDir+'subclusters_reduced_result.csv', index_col=[0])
 n_cluster = len(df['cluster'].value_counts().index)
 
 geom_avg = []
@@ -44,10 +46,17 @@ for clus_no in range(n_cluster):
 
 cluster_array = np.array(cluster_array).reshape(-1,1)
 geom_avg = np.array(geom_avg)
+
+columns1 = ['theta'+str(i) for i in range(3)]
+columns2 = ['phi'+str(i) for i in range(geom_avg.shape[1]-3)]
+columns3 = ['cluster']
+
 geom_avg = np.concatenate((geom_avg, cluster_array), axis=1)
+geom_df = pd.DataFrame(geom_avg, columns = columns1+columns2+columns3)
 spec_avg = np.array(spec_avg)
 
-np.savetxt('geom_avg_dki1.csv', geom_avg, delimiter=',')
-np.savetxt('spectra_100bins_560-570nm_dki1.dat', spec_avg)
+geom_df.to_csv(dataDir+'geom_avg_dki1.csv', index=False)
+#np.savetxt('geom_avg_dki1.csv', geom_avg, delimiter=',')
+np.savetxt(dataDir+'spectra_100bins_560-570nm_dki1.dat', spec_avg)
 
 

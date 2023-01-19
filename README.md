@@ -1,4 +1,5 @@
 # mlspectra-melanin
+![graphics](image.png)
 Program for machine learning inverse design of electronic spectra to structure of DHICA-melanin
 ## Preparing data for machine learning
 ### Clustering

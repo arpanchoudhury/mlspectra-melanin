@@ -38,10 +38,11 @@ python run_KRR-ML.py --minrange 290 --maxrange 300 --Ntrain 10000
 ```
 `--minrange` and `--maxrange` specify the spectral range and `--Ntrain` specifies the training set size.
 ## Requirements
+The codes were tested with Python 3.8.10 on HP-OMEN [Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz] as well as with Python 2.7.5 on linux workstation [Intel(R) Xeon(R) CPU E5-1650 v4 @ 3.60GHz]. Below are the versions of python modules used on the HP-OMEN
 ```
-Numpy
-Pandas
-Scipy
-Scikit-learn
-Joblib
+numpy 1.22.3
+pandas 1.4.2
+scipy 1.8.0
+scikit-learn 1.0.2
+joblib 1.1.0
 ```

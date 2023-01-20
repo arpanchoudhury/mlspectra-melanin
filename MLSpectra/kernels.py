@@ -1,5 +1,5 @@
 import numpy as np
-import MLSpectra.fortran_kernels as fKernels
+import mlspectra.fortran_kernels as fKernels
 
 
 def laplacian_kernel(A, B, sigma):

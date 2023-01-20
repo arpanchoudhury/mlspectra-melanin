@@ -1,8 +1,12 @@
+import os
 import numpy as np
 import pandas as pd
 import random 
-import MLSpectra
+import mlspectra
 
+
+dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
+resDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'training_data/')
 
 
 # Specify molecular species and their important clusters 
@@ -20,12 +24,13 @@ imp_spec = []
 imp_geom = []
 for imol in range(len(molecules)):
     name = molecules[imol]
-    spec, geom = MLSpectra.read_data('clusters/geom_avg_'+name+'.csv', 'clusters/spectra_100bins_290-300nm_'+name+'.dat', imp_cluster[imol])
+    spec, geom = mlspectra.read_data(dataDir+'geom_avg_'+name+'.csv', dataDir+'spectra_100bins_290-300nm_'+name+'.dat', imp_cluster[imol])
     imp_spec.append(spec)
     imp_geom.append(geom)
 
 
-# Create final ML dataset taking random combinations between reduced, mki, dki
+# Make final ML dataset taking random combinations between reduced, mki, dki
+# to create the summed spectra
 tot_len = sum([len(i) for i in imp_cluster])
 idx_list = [[0]*tot_len] 
 
@@ -69,6 +74,6 @@ for iData in range(NData):
 X = np.array(X)
 Y = np.array(Y)
 
-np.save('training_data/spec_290-300nm.npy', X)
-np.save('training_data/geom_290-300nm.npy', Y)
+np.save(resDir+'spec_290-300nm.npy', X)
+np.save(resDir+'geom_290-300nm.npy', Y)
 

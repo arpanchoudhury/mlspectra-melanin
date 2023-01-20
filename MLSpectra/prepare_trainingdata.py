@@ -1,5 +1,5 @@
 import numpy as np
-import MLSpectra.kernels as kernels
+import mlspectra.kernels as kernels
 
 
 

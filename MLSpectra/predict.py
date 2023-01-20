@@ -1,5 +1,5 @@
 import numpy as np
-import MLSpectra.kernels as kernels
+import mlspectra.kernels as kernels
 
 
 def predict(kernel,X_train, X_query,alpha,indices_t,indices_q,iquery,opt_sigma):

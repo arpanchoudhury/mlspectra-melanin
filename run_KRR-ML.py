@@ -2,7 +2,7 @@ import os
 import argparse as ap
 import numpy as np
 from sklearn.model_selection import train_test_split
-import MLSpectra
+import mlspectra
 
 
 
@@ -35,7 +35,7 @@ np.save(resDir+filename+'_X_test.npy', X_test)
 np.save(resDir+filename+'_X_train.npy', X_train)
 np.save(resDir+filename+'_y_test.npy', Y_test)
 
-indices, indices_q = MLSpectra.gen_index(resDir, X_train, X_test, shuffle=False)
+indices, indices_q = mlspectra.gen_index(resDir, X_train, X_test, shuffle=False)
 
 
 # ================= Kernel specific inputs =================
@@ -43,16 +43,16 @@ kernel = 'laplacian'
 load_K = False
 file_kernel = 'kernel.npy'
 lamd = 1e-4
-opt_sigma = MLSpectra.single_kernel_sigma(500, X_train, indices, kernel, 'max')
+opt_sigma = mlspectra.single_kernel_sigma(500, X_train, indices, kernel, 'max')
 with open(resDir+filename+'_opt_sigma.dat', 'w+') as f_sigma:
     f_sigma.write(str(opt_sigma))
 
 
 # ================= Training =================
-K, P = MLSpectra.prepare_trainingdata(kernel,N_train,load_K,file_kernel,indices,lamd,X_train,Y_train,opt_sigma) 
+K, P = mlspectra.prepare_trainingdata(kernel,N_train,load_K,file_kernel,indices,lamd,X_train,Y_train,opt_sigma) 
 
 print('Solving matrix equation...')
-alpha = MLSpectra.linalg_solve(K,P)
+alpha = mlspectra.linalg_solve(K,P)
 np.save(resDir+filename+'_alpha.npy', alpha)
 
 """
@@ -61,7 +61,7 @@ print('Predicting...')
 out_of_sample_mae = []
 
 for iquery in range(X_test.shape[0]):
-    y_pred, _ = MLSpectra.predict(kernel,X_train,X_test,alpha,indices,indices_q,iquery,opt_sigma)
+    y_pred, _ = mlspectra.predict(kernel,X_train,X_test,alpha,indices,indices_q,iquery,opt_sigma)
     y_act = Y_test[indices_q[iquery],:]
     phi = np.abs(y_pred - y_act)
     out_of_sample_mae.append(phi)

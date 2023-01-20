@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-import MLSpectra
+import mlspectra
 
 
 dataDir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'clusters/')
@@ -15,7 +15,7 @@ wavelength_max = 800
 N_bin = 60
 read_spec = False            # If true, binned spectra will be loaded from 'file_spec', if false will be calculated and stored in this file
 file_spec = 'mki1.dat'
-Int_lam, lambda_min, dlambda = MLSpectra.bin_spectra_uniform(spec_path, read_spec, file_spec, wavelength_min, wavelength_max, N_bin)
+Int_lam, lambda_min, dlambda = mlspectra.bin_spectra_uniform(spec_path, read_spec, file_spec, wavelength_min, wavelength_max, N_bin)
 
 
 # Cluster-wise averaging 

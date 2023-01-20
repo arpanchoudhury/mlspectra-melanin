@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-import MLSpectra
+import mlspectra
 
 
 
@@ -17,7 +17,7 @@ wavelength_max = 570
 N_bin = 100
 read_spec = False            # If true, binned spectra will be loaded from 'file_spec', if false will be calculated and stored in this file
 file_spec = 'dki1.dat'    
-Int_lam, lambda_min, dlambda = MLSpectra.bin_spectra_uniform(spec_path, read_spec, file_spec, wavelength_min, wavelength_max, N_bin)
+Int_lam, lambda_min, dlambda = mlspectra.bin_spectra_uniform(spec_path, read_spec, file_spec, wavelength_min, wavelength_max, N_bin)
 
 
 

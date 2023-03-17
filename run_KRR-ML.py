@@ -31,9 +31,9 @@ Y = np.load(dataDir+'geom_'+filename+'.npy')
 # ================= Train-Test split =================
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, shuffle=True, test_size=10000)
 
-np.save(resDir+filename+'_X_test.npy', X_test)
 np.save(resDir+filename+'_X_train.npy', X_train)
-np.save(resDir+filename+'_y_test.npy', Y_test)
+#np.save(resDir+filename+'_X_test.npy', X_test)
+#np.save(resDir+filename+'_y_test.npy', Y_test)
 
 indices, indices_q = mlspectra.gen_index(resDir, X_train, X_test, shuffle=False)
 
